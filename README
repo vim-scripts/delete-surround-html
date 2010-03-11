@@ -1,0 +1,53 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=3010
+
+Repo: http://github.com/mjbrownie/delete-surround-html
+Example vid (includes other plugins): http://www.youtube.com/watch?v=NbV-OrFMalU
+
+ after/ftplugin/html/delete_surround_html.vim
+
+ For Deleting Surrounding html  and django tags
+
+ This plugin is inspired by Tim Popes surround.vim delete-surround-tag 'dst'
+ mapping. It will let you delete the surrounding tag of a specified type
+ rather than just the immediate tag.
+
+on html filetypes this will add two normal mappings in your vimrc
+
+'dsh' (delete-surround-html) 
+delete - surround - html - (u)l / (l)i / (d)iv / (s)pan / (f)orm / (t)able / t(r) / (c)td / (p):
+
+'dsd' (delete-surround-django) will give you the options
+delete - surround - django - (b)lock / (c)omment / (i)f* / (w)ith / (f)or :
+
+simple example here
+
+{% comment%}
+{% block foo %}
+<div id="bar">
+    <ul>
+        <li>'dsdc' here will remove the comment</li>
+        <li>'dsdb' here will remove the block</li>
+        <li>'dshd' here will remove the div</li>
+        <li>'dshu' here will remove the ul</li>
+        <li>'dshl' here will remove the li</li>
+    </ul>
+</div>
+{% endblock %}
+{% endcomment %}
+
+This scripts mnemonics are intended to compliment these two scripts
+
+django-textobjects  http://www.vim.org/scripts/script.php?script_id=2999
+html-advanced-textobjects http://www.vim.org/scripts/script.php?script_id=3000
+
+Also if you want the reverse, ie. to surround a visual selection with django tags
+
+you can also use http://www.vim.org/scripts/script.php?script_id=1697 with the following mappings
+
+let g:surround_{char2nr("b")} = "{% block\1 \r..*\r &\1%}\n\r\n{% endblock %}\n"
+let g:surround_{char2nr("i")} = "{% if\1 \r..*\r &\1%}\n\r\n{% endif %}\n"
+let g:surround_{char2nr("w")} = "{% with\1 \r..*\r &\1%}\n\r\n{% endwith %}\n"
+let g:surround_{char2nr("c")} = "{% comment\1 \r..*\r &\1%}\n\r\n{% endcomment %}\n"
+let g:surround_{char2nr("f")} = "{% for\1 \r..*\r &\1%}\n\r\n{% endfor %}\n"
+
+then go v...sb.. etc
